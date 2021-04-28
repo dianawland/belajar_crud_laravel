@@ -52,7 +52,7 @@ Route::post('/pegawai/update','PegawaiController@update');
 
 Route::get('/pegawai/hapus/{id}','PegawaiController@hapus');
 
-//route cari
+//route cari tes
 Route::get('/pegawai/cari','PegawaiController@cari');
 
 
