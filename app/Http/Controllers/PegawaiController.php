@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+use Session;
+
+
 class PegawaiController extends Controller
 {
     //
@@ -40,21 +43,31 @@ public function tambah()
  
 	// memanggil view tambah
 	return view('tambah');
+	
+
+
  
 }
 
 // method untuk insert data ke table pegawai
 public function store(Request $request)
 {
+	// dd($request);exit;
 	// insert data ke table pegawai
 	DB::table('pegawai')->insert([
 		'pegawai_nama' => $request->nama,
 		'pegawai_jabatan' => $request->jabatan,
 		'pegawai_umur' => $request->umur,
-		'pegawai_alamat' => $request->alamat
+		'pegawai_alamat' => $request->alamat,
+		'agama'=> $request->agama
 	]);
+
+	Session::flash('flash_message','successfully saved.');
+	
 	// alihkan halaman ke halaman pegawai
-	return redirect('/pegawai');
+	return redirect('/pegawai')->with('status','Data Kontak Berhasil Ditambahkan');
+
+	
  
 }
 
@@ -87,6 +100,8 @@ public function hapus($id)
 {
 	// menghapus data pegawai berdasarkan id yang dipilih
 	DB::table('pegawai')->where('pegawai_id',$id)->delete();
+
+	Session::flash('flash_message','successfully delete.');
 		
 	// alihkan halaman ke halaman pegawai
 	return redirect('/pegawai');

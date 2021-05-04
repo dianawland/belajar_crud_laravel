@@ -17,10 +17,12 @@
 
  
 				<h2 class="text-center"><a href="">Belajar Laravel bersama BTS </a></h2>
- 				
+				@if(Session::has('flash_message'))
+					<div class="alert alert-success"><span class="glyphicon glyphicon-ok"></span><em> {!! session('flash_message') !!}</em></div>
+				@endif
 				 <h3>Data Pegawai</h3>
 
-				 <a href="/pegawai/tambah"> + Tambah Pegawai Baru</a>
+				 <a class="btn btn-info btn-lg" a href="/pegawai/tambah"> + Tambah Pegawai Baru</a>
 
 				 <p>Cari Data Pegawai :</p>
 
@@ -41,17 +43,24 @@
 						<th>Nama</th>
 						<th>Jabatan</th>
 						<th>Umur</th>
+						<th>Agama</th>
 						<th>Alamat</th>
 						<th>Opsi</th>
+		
 					</tr>
 					@foreach($pegawai as $p)
+					<?php
+					// var_dump($p);exit;
+					?>
 					<tr>
 						<td>{{ $p->pegawai_nama }}</td>
 						<td>{{ $p->pegawai_jabatan }}</td>
 						<td>{{ $p->pegawai_umur }}</td>
+						<td>{{ $p->agama }}</td>
 						<td>{{ $p->pegawai_alamat }}</td>
 						<td>
 							<a class="btn btn-warning btn-sm" href="/pegawai/edit/{{ $p->pegawai_id }}">Edit</a>
+							
 							<a class="btn btn-danger btn-sm" href="/pegawai/hapus/{{ $p->pegawai_id }}">Hapus</a>
 						</td>
 					</tr>
